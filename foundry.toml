@@ -7,6 +7,7 @@ remappings = [
     "account-abstraction/=dependencies/eth-infinitism-account-abstraction-0.7/",
     "forge-std/=dependencies/forge-std-1.9.6/src",
     "simple-account/=dependencies/erc4337-simple-account-0.0.1/",
+    "simple-paymaster/=dependencies/simple-paymaster-0.0.1/",
 ]
 
 [dependencies]
@@ -14,6 +15,7 @@ forge-std = "1.9.6"
 erc4337-simple-account = { version = "0.0.1", url = "https://github.com/nikbhintade/erc4337-simple-account/archive/refs/tags/0.0.1.zip" }
 "@openzeppelin-contracts" = "5.2.0"
 eth-infinitism-account-abstraction = "0.7"
+simple-paymaster = { version = "0.0.1", url = "https://github.com/nikbhintade/erc4337-simple-paymaster/archive/refs/tags/0.0.1.zip" }
 
 [soldeer]
 remappings_generate = true

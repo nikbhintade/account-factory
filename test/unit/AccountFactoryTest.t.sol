@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity 0.8.24;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, console2 as console} from "forge-std/Test.sol";
 
 import {AccountFactory} from "src/AccountFactory.sol";
+
+import {SimpleAccount} from "simple-account/src/SimpleAccount.sol";
 
 import {EntryPoint} from "account-abstraction/contracts/core/EntryPoint.sol";
 
@@ -21,7 +23,8 @@ contract AccountFactoryTest is Test {
         bytes32 salt = keccak256(abi.encode("salt"));
 
         address accountAddress = s_accountFactory.deployAccount(s_entryPoint, owner, salt);
-
+        
         assertEq(accountAddress, s_accountFactory.getAddress(s_entryPoint, owner, salt));
+        assertEq(SimpleAccount(accountAddress).owner(), owner);
     }
 }
