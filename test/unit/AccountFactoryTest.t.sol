@@ -23,7 +23,6 @@ contract AccountFactoryTest is Test {
         bytes32 salt = keccak256(abi.encode("salt"));
 
         address accountAddress = s_accountFactory.deployAccount(s_entryPoint, owner, salt);
-        
         assertEq(accountAddress, s_accountFactory.getAddress(s_entryPoint, owner, salt));
         assertEq(SimpleAccount(accountAddress).owner(), owner);
     }
