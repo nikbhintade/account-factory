@@ -11,13 +11,8 @@ import {IEntryPoint} from "account-abstraction/contracts/interfaces/IEntryPoint.
 
 contract AccountFactory {
     function deployAccount(IEntryPoint entryPoint, address owner, bytes32 salt) public returns (address) {
-        console.log("deployAccount was called");
         bytes memory bytecode = abi.encodePacked(type(SimpleAccount).creationCode, abi.encode(entryPoint, owner));
-        // console.logBytes(bytecode);
-        address accountContract = Create2.deploy(0, salt, bytecode);
-        console.log("address of newly deployed contract");
-        console.log(accountContract);
-        return accountContract;
+        return Create2.deploy(0, salt, bytecode);
     }
 
     function getAddress(IEntryPoint entryPoint, address owner, bytes32 salt) public view returns (address) {

@@ -51,7 +51,6 @@ contract AccountFactoryIntegration is Test {
 
         // get address of account contract
         address sender = s_accountFactory.getAddress(s_entryPoint, s_owner.addr, salt);
-        console.log(sender);
 
         // create userOp
         PackedUserOperation memory userOp = PackedUserOperation({
@@ -59,7 +58,7 @@ contract AccountFactoryIntegration is Test {
             nonce: 0,
             initCode: hex"",
             callData: hex"",
-            accountGasLimits: bytes32(uint256(700_000) << 128 | uint256(700_000)),
+            accountGasLimits: bytes32(uint256(1_000_000) << 128 | uint256(1_000_000)),
             preVerificationGas: 0,
             gasFees: bytes32(uint256(0) << 128 | uint256(0)),
             paymasterAndData: hex"",
@@ -115,6 +114,10 @@ contract AccountFactoryIntegration is Test {
         PackedUserOperation[] memory userOps = new PackedUserOperation[](1);
 
         userOps[0] = userOp;
+
+        // the userOp execution is going to fail as we are sending eth from account
+        // contract which it doesn't have but for testing factory that's okay as
+        // main purpose this test is to test if factory deploys new account which it should 
 
         // check correct event emitted
         vm.expectEmit(true, true, true, false, address(s_entryPoint));
